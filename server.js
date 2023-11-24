@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
+const cors = require("cors");
 
 // Load environment variables
 const dotenvResult = dotenv.config();
@@ -22,7 +23,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Root route
+app.use(cors());
 app.get("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials","true");
   res.status(200).json({ message: "Welcome to Support Desk" });
 });
 
